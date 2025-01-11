@@ -140,7 +140,6 @@ export default async function id(
   })) as ChapterFromRSS[];
 
   const comicData = response.data.data.get_content_comicNode as GetByIDResponse;
-  console.log(comicData);
   const chaptersArr: Chapter[] = [];
   for (let i = 0; i < chapters.length; i++) {
     let chapter = chapters[i];

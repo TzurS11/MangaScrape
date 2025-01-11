@@ -20,23 +20,6 @@ type Random = {
 };
 
 export default async function random(options?: BATOTO_OPTIONS) {
-  //   const document = await fetchHTML(
-  //     getBaseURL(options) + "/v3x-random",
-  //     options?.proxy
-  //   );
-
-  //   const body = document.body;
-
-  //   const description =
-  //     document
-  //       .querySelector('meta[name="description"]')
-  //       ?.getAttribute("content") || "N/A";
-  //   const keywords =
-  //     document.querySelector('meta[name="keywords"]')?.getAttribute("content") ||
-  //     "N/A";
-
-  //   console.log(body.outerHTML);
-
   let requestConfig = {
     proxy:
       options?.proxy?.host == undefined || options.proxy.port == undefined
