@@ -21,7 +21,7 @@ type GetByID = {
   title: { original: string; alt: string[] };
 };
 
-export default async function getByID(
+export default async function id(
   id: string,
   options?: BATOTO_OPTIONS
 ): Promise<GetByID> {
@@ -140,7 +140,7 @@ export default async function getByID(
   })) as ChapterFromRSS[];
 
   const comicData = response.data.data.get_content_comicNode as GetByIDResponse;
-
+  console.log(comicData);
   const chaptersArr: Chapter[] = [];
   for (let i = 0; i < chapters.length; i++) {
     let chapter = chapters[i];
@@ -150,6 +150,7 @@ export default async function getByID(
       pubDate: chapter.pubDate,
     });
   }
+  chaptersArr.reverse(); // Reverse the array to get the first chapter first
 
   return {
     genres: formatGeners(comicData.data.genres),

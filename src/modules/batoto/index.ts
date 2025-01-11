@@ -1,5 +1,6 @@
-import getByID from "./modules/getByID";
+import chapter from "./modules/chapter";
 import home from "./modules/home";
+import id from "./modules/id";
 import random from "./modules/random";
 import { BATOTO_OPTIONS, DEFAULTURL } from "./types";
 
@@ -28,7 +29,11 @@ export default class BATOTO {
    * Get a comic by its ID
    * @returns Detailed data about the comic. including chapters
    */
-  getByID(id: string) {
-    return getByID(id, this.options);
+  id(comicID: string) {
+    return id(comicID, this.options);
+  }
+
+  chapter(comicID: string, chapterID: string) {
+    return chapter(comicID, chapterID, this.options);
   }
 }
