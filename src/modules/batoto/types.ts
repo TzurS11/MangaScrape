@@ -1,9 +1,16 @@
 import { Options } from "../../types";
 
 export interface BATOTO_OPTIONS extends Options {
-  baseUrl?: BASEURLS;
+  /**
+   * The base URL of the website. You can use valid urls and deprecated urls.
+   */
+  baseUrl?: BASEURLS | DeprecatedBaseURLS;
 }
 
+/**
+ * Valid Base URLs.
+ * Check https://rentry.co/batoto for an updated list
+ */
 export type BASEURLS =
   | "https://fto.to"
   | "https://jto.to"
@@ -28,6 +35,15 @@ export type BASEURLS =
   | "https://dto.to"
   | "https://mto.to"
   | "https://wto.to";
+
+/**
+ * @deprecated Deprecating and Not recommended. Use BASEURLS instead
+ */
+export type DeprecatedBaseURLS =
+  | "https://mangatoto.com"
+  | "https://mangatoto.net"
+  | "https://mangatoto.org"
+  | "https://bato.to";
 
 export const DEFAULTURL = "https://fto.to";
 

@@ -1,6 +1,13 @@
-import { BASEURLS, BATOTO_OPTIONS, DEFAULTURL } from "./types";
+import {
+  BASEURLS,
+  BATOTO_OPTIONS,
+  DEFAULTURL,
+  DeprecatedBaseURLS,
+} from "./types";
 
-export function getBaseURL(options?: BATOTO_OPTIONS): BASEURLS {
+export function getBaseURL(
+  options?: BATOTO_OPTIONS
+): BASEURLS | DeprecatedBaseURLS {
   return options?.baseUrl || DEFAULTURL;
 }
 

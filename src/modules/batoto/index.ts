@@ -2,6 +2,7 @@ import chapter from "./modules/chapter";
 import home from "./modules/home";
 import id from "./modules/id";
 import random from "./modules/random";
+import search, { SearchFilters } from "./modules/search";
 import { BATOTO_OPTIONS, DEFAULTURL } from "./types";
 
 export default class BATOTO {
@@ -41,5 +42,13 @@ export default class BATOTO {
    */
   chapter(comicID: string, chapterID: string) {
     return chapter(comicID, chapterID, this.options);
+  }
+
+  /**
+   * Search for comics. Returns an array of comics.
+   * Limited Data. Use id method to get detailed data.
+   */
+  search(filter?: SearchFilters) {
+    return search(filter, this.options);
   }
 }
