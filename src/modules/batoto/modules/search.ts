@@ -80,7 +80,7 @@ export default async function search(
     urlParams.status = StatusMap[filters.BatoUploadStatus];
 
   const url = buildUrl(baseURL, urlParams);
-  const document = await fetchHTML(url);
+  const document = await fetchHTML(url, options?.proxy);
   const body = document.body;
 
   let results: Results[] = [];

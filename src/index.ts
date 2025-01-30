@@ -1,5 +1,7 @@
 import BATOTO from "./modules/batoto";
 import { BATOTO_OPTIONS } from "./modules/batoto/types";
+import MANGAKAKALOT from "./modules/mangakakalot";
+import { MANGAKAKALOT_OPTIONS } from "./modules/mangakakalot/types";
 
 export default class MangaScrape {
   /**
@@ -10,5 +12,9 @@ export default class MangaScrape {
    */
   BATOTO(options?: BATOTO_OPTIONS) {
     return new BATOTO(options);
+  }
+
+  MANGAKAKALOT(options?: MANGAKAKALOT_OPTIONS) {
+    return new MANGAKAKALOT(options);
   }
 }
