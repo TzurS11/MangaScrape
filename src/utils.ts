@@ -46,3 +46,14 @@ export function querySelectorAllRegex(
   );
   return matchingElements;
 }
+
+export function buildUrl(baseUrl: string, params: Record<string, string>) {
+  const url = new URL(baseUrl); // Create a URL object
+
+  // Append parameters using URLSearchParams
+  Object.keys(params).forEach((key) =>
+    url.searchParams.append(key, params[key])
+  );
+
+  return decodeURIComponent(url.toString());
+}

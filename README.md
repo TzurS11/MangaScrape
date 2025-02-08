@@ -2,7 +2,7 @@
 
 <p id="description">MangaScrape is a tool designed to scrape various manga sources providing easy access to manga data and chapters.</p>
 
-<p align="center"><img src="https://img.shields.io/github/license/TzurS11/MangaScrape" alt="shields"> <img src="https://img.shields.io/github/last-commit/tzurs11/mangascrape" alt="shields"> <img src="https://img.shields.io/github/package-json/v/tzurs11/mangascrape" alt="shields"> <img src="https://img.shields.io/npm/dw/MangaScrape" alt="shields"> <img src="https://img.shields.io/github/stars/tzurs11/mangascrape?style=flat" alt="shields"></p>
+<p align="center"><img src="https://img.shields.io/github/license/TzurS11/mangascrape" alt="shields"> <img src="https://img.shields.io/github/last-commit/tzurs11/mangascrape" alt="shields"> <img src="https://img.shields.io/github/package-json/v/tzurs11/mangascrape" alt="shields"> <img src="https://img.shields.io/npm/dw/mangascrape" alt="shields"> <img src="https://img.shields.io/github/stars/tzurs11/mangascrape?style=flat" alt="shields"></p>
 
 <h2>🧐 Features</h2>
 
@@ -13,7 +13,11 @@ Here're some of the project's best features:
 - Multiple sources
 
 <h2>🌐 Sources</h2>
-[x] Bato.to (not fully suppported)
+[x] Bato.to
+<br>
+[x] MangaBuddy
+<br>
+[ ] Mangakakalot
 <br>
 [ ] Mangadex
 

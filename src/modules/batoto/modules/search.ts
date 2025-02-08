@@ -19,7 +19,7 @@ import {
   Status,
   StatusMap,
 } from "./searchTypes";
-import { fetchHTML, querySelectorAllRegex } from "../../../utils";
+import { buildUrl, fetchHTML, querySelectorAllRegex } from "../../../utils";
 
 export type SearchFilters = {
   query?: string;
@@ -42,17 +42,6 @@ type Results = {
   mature: boolean;
   lastChapter: { title: string; id: string };
 };
-
-function buildUrl(baseUrl: string, params: Record<string, string>) {
-  const url = new URL(baseUrl); // Create a URL object
-
-  // Append parameters using URLSearchParams
-  Object.keys(params).forEach((key) =>
-    url.searchParams.append(key, params[key])
-  );
-
-  return decodeURIComponent(url.toString());
-}
 
 type Search = {
   results: Results[];
