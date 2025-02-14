@@ -121,10 +121,9 @@
             <button class="tab active" data-lang="js">JavaScript</button>
             <button class="tab" data-lang="ts">TypeScript</button>
           </div>
-          <pre><code class="hljs language-javascript" id="usage-code">const { MangaScrape } = require("mangascrape");
+          <pre><code class="hljs language-javascript" id="usage-code">const { Batoto } = require("mangascrape");
 
-const client = new MangaScrape();
-const batoto = client.BATOTO();
+const batoto = new Batoto();
 
 async function getFirstChapter() {
     const manga = await batoto.search({
