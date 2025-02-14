@@ -47,10 +47,9 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const codeContent = {
-    js: `const { MangaScrape } = require("mangascrape");
+    js: `const { Batoto } = require("mangascrape");
 
-const client = new MangaScrape();
-const batoto = client.BATOTO();
+const batoto = new Batoto();
 
 async function getFirstChapter() {
     const manga = await batoto.search({
@@ -65,10 +64,9 @@ async function getFirstChapter() {
     return chapter;
 }
 getFirstChapter().then(console.log).catch(console.error);`,
-    ts: `import { MangaScrape } from "mangascrape";
+    ts: `import { Batoto } from "mangascrape";
 
-const client = new MangaScrape();
-const batoto = client.BATOTO();
+const batoto = new Batoto();
 
 async function getFirstChapter(): Promise<string[]> {
     const manga = await batoto.search({
