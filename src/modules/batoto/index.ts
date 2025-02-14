@@ -5,7 +5,13 @@ import random from "./modules/random";
 import search, { SearchFilters } from "./modules/search";
 import { BATOTO_OPTIONS, DEFAULTURL } from "./types";
 
-export default class BATOTO {
+/**
+ * BATOTO module. Use this module to scrape manga from BATOTO.
+ *
+ * Before using this source please read the [Terms Of Service](https://bato.to/terms-of-service)
+ * specifically the section "Website Access"(3) rule no. 6
+ */
+export class BATOTO {
   options: BATOTO_OPTIONS = { baseUrl: DEFAULTURL };
   constructor(options?: BATOTO_OPTIONS) {
     if (options) {

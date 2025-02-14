@@ -7,7 +7,15 @@ import { MANGABUDDY_OPTIONS } from "./types";
 import search from "./modules/search";
 import chapter from "./modules/chapter";
 
-export default class MANGABUDDY {
+/**
+ * MANGABUDDY module. Use this module to scrape manga from MANGABUDDY.
+ *
+ * **TO ACCESS ANY IMAGE FROM THIS WEBSITE YOU NEED TO HAVE https://mangabuddy.com/ AS YOUR REFERER IN YOUR REQUEST HEADERS. THIS INCLUDES CHAPTER PAGES AND MANGA THUMBNAILS.**
+ *
+ * Before using this source please read the [Terms Of Service](https://bato.to/terms-of-service)
+ * specifically the section "Website Access"(3) rule no. 6
+ */
+export class MANGABUDDY {
   options: MANGABUDDY_OPTIONS = {};
   constructor(options?: MANGABUDDY_OPTIONS) {
     if (options) this.options = options;
