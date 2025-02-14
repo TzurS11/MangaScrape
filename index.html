@@ -1,72 +1,164 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MangaScrape</title>
-    <meta name="description" content="MangaScrape is a tool designed to scrape various manga sources providing easy access to manga data and chapters." />
-    <meta name="keywords" content="MangaScrape, manga, scrape, manga data, manga chapters" />
+    <title>MangaScrape - Manga Scraping Tool</title>
+    <meta
+      name="description"
+      content="MangaScrape is a tool designed to scrape various manga sources providing easy access to manga data and chapters."
+    />
+    <meta
+      name="keywords"
+      content="MangaScrape, manga, scrape, manga data, manga chapters"
+    />
     <meta name="author" content="TzurS11" />
-    <link rel="icon" href="https://github.com/TzurS11/MangaScrape/blob/gh-pages/favicon.png?raw=true" type="image/x-icon" />
+    <link
+      rel="icon"
+      href="https://github.com/TzurS11/MangaScrape/blob/gh-pages/favicon.png?raw=true"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="styles.css" />
+
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
+      .theme-switch {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        display: flex;
+        align-items: center;
       }
-      .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #fff;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      .theme-switch input {
+        display: none;
       }
-      h1, h2 {
-        text-align: center;
-      }
-      .badges {
-        text-align: center;
-        margin-bottom: 20px;
-      }
-      .badges img {
-        margin: 0 5px;
-      }
-      .features, .sources, .installation, .contribution, .license {
-        margin-bottom: 20px;
+      .theme-switch label {
+        cursor: pointer;
+        font-size: 1.5rem;
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <h1 id="title">MangaScrape</h1>
-      <p id="description">MangaScrape is a tool designed to scrape various manga sources providing easy access to manga data and chapters.</p>
-      <div class="badges">
-        <img src="https://img.shields.io/github/license/TzurS11/mangascrape" alt="License">
-        <img src="https://img.shields.io/github/last-commit/tzurs11/mangascrape" alt="Last Commit">
-        <img src="https://img.shields.io/github/package-json/v/tzurs11/mangascrape" alt="Version">
-        <img src="https://img.shields.io/npm/dw/mangascrape" alt="Downloads">
-        <img src="https://img.shields.io/github/stars/tzurs11/mangascrape?style=flat" alt="Stars">
-      </div>
-      <h2>🧐 Features</h2>
-      <ul class="features">
-        <li>Scrape mangas easily</li>
-        <li>Fully typed</li>
-        <li>Multiple sources</li>
-      </ul>
-      <h2>🌐 Sources</h2>
-      <ul class="sources">
-        <li>Bato.to</li>
-        <li>MangaBuddy</li>
-        <li>Mangakakalot (coming soon)</li>
-        <li>Mangadex (coming soon)</li>
-      </ul>
-      <h2>🛠️ Installation Steps:</h2>
-      <pre class="installation"><code>npm i mangascrape</code></pre>
-      <h2>🍰 Contribution Guidelines:</h2>
-      <p class="contribution">Contributing is easy. Just clone the repository and commit changes.</p>
-      <h2>🛡️ License:</h2>
-      <p class="license">This project is licensed under the MIT License.</p>
+    <div class="theme-switch">
+      <input type="checkbox" id="theme-toggle" />
+      <label for="theme-toggle">🌙</label>
     </div>
+
+    <main>
+      <div class="container">
+        <h1 align="center" id="title">
+          <img
+            src="https://github.com/TzurS11/MangaScrape/blob/gh-pages/favicon.png?raw=true"
+            alt="MangaScrape Logo"
+            class="title-icon"
+          />
+          MangaScrape
+          <img
+            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg"
+            alt="JavaScript"
+            class="lang-icon"
+          />
+          <img
+            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg"
+            alt="TypeScript"
+            class="lang-icon"
+          />
+        </h1>
+        <p class="description">
+          MangaScrape is a tool designed to scrape various manga sources
+          providing easy access to manga data and chapters.
+        </p>
+
+        <div class="badges">
+          <img
+            src="https://img.shields.io/github/license/TzurS11/mangascrape"
+            alt="license"
+          />
+          <img
+            src="https://img.shields.io/github/last-commit/tzurs11/mangascrape"
+            alt="last commit"
+          />
+          <img
+            src="https://img.shields.io/github/package-json/v/tzurs11/mangascrape"
+            alt="version"
+          />
+          <img
+            src="https://img.shields.io/npm/dw/mangascrape"
+            alt="downloads"
+          />
+          <img
+            src="https://img.shields.io/github/stars/tzurs11/mangascrape?style=flat"
+            alt="stars"
+          />
+        </div>
+
+        <section>
+          <h2>🛠️ Installation</h2>
+          <pre><code>npm i mangascrape</code></pre>
+        </section>
+
+        <section>
+          <h2>🧐 Features</h2>
+          <ul>
+            <li>Scrape mangas easily</li>
+            <li>Fully typed</li>
+            <li>Multiple sources</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>🌐 Sources</h2>
+          <ul class="sources">
+            <li class="supported">Bato.to</li>
+            <li class="supported">MangaBuddy</li>
+            <li class="planned">Mangakakalot</li>
+            <li class="planned">Mangadex</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>⌨️ Usage</h2>
+          <div class="code-tabs">
+            <button class="tab active" data-lang="js">JavaScript</button>
+            <button class="tab" data-lang="ts">TypeScript</button>
+          </div>
+          <pre><code class="hljs language-javascript" id="usage-code">const { MangaScrape } = require("mangascrape");
+
+const client = new MangaScrape();
+const batoto = client.BATOTO();
+
+async function getFirstChapter() {
+    const manga = await batoto.search({
+        query: "Demon Slayer",
+        genres: { include: { ContentTag: ["Shounen"] } },
+    });
+    if (manga.results.length < 1) return [];
+
+    const detailed = await batoto.id(manga.results[0].id);
+    if (detailed == undefined) return [];
+    const chapter = await batoto.chapter(detailed.id, detailed.chapters[0].id);
+    return chapter;
+}
+getFirstChapter().then(console.log).catch(console.error);</code></pre>
+        </section>
+      </div>
+    </main>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+      id="highlight-light"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+      id="highlight-dark"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/typescript.min.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
