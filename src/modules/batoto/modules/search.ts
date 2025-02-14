@@ -72,46 +72,50 @@ export default async function search(
   const document = await fetchHTML(url, options?.proxy);
   const body = document.body;
 
+  const emptyList = body.querySelector(".btn.btn-block.disabled") != null;
+
   let results: Results[] = [];
 
-  const latestReleasesWrapper = document.querySelector(
-    "#app-wrapper > main > div.grid.grid-cols-1.gap-5.border-t.border-t-base-200.pt-5"
-  ) as HTMLDivElement;
+  if (emptyList == false) {
+    const latestReleasesWrapper = document.querySelector(
+      "#app-wrapper > main > div.grid.grid-cols-1.gap-5.border-t.border-t-base-200.pt-5"
+    ) as HTMLDivElement;
 
-  const latestReleasesDivs = querySelectorAllRegex(
-    latestReleasesWrapper,
-    "data-hk",
-    /0-0-3-\d*-0/
-  );
+    const latestReleasesDivs = querySelectorAllRegex(
+      latestReleasesWrapper,
+      "data-hk",
+      /0-0-3-\d*-0/
+    );
 
-  latestReleasesDivs.forEach((currentDiv) => {
-    const currentDiv_img = currentDiv.querySelector("img");
-    if (!currentDiv_img) return;
+    latestReleasesDivs.forEach((currentDiv) => {
+      const currentDiv_img = currentDiv.querySelector("img");
+      if (!currentDiv_img) return;
 
-    const parent_currentDiv_img =
-      currentDiv_img.parentElement as HTMLAnchorElement;
-    const lastChapterAnchor = currentDiv.querySelector(
-      ".link-hover.link-primary.visited\\:link-accent"
-    ) as HTMLAnchorElement;
-    const lastChapterText =
-      lastChapterAnchor?.querySelector("span")?.innerHTML || "N/A";
-    const lastChapterID = lastChapterAnchor?.href.split("/")[3].split("-")[0];
+      const parent_currentDiv_img =
+        currentDiv_img.parentElement as HTMLAnchorElement;
+      const lastChapterAnchor = currentDiv.querySelector(
+        ".link-hover.link-primary.visited\\:link-accent"
+      ) as HTMLAnchorElement;
+      const lastChapterText =
+        lastChapterAnchor?.querySelector("span")?.innerHTML || "N/A";
+      const lastChapterID = lastChapterAnchor?.href.split("/")[3].split("-")[0];
 
-    const genres = Array.from(
-      querySelectorAllRegex(currentDiv, "data-hk", /0-0-3-\d*-6-2-\d*-3-0/)
-    ).map((span) => span.innerHTML);
+      const genres = Array.from(
+        querySelectorAllRegex(currentDiv, "data-hk", /0-0-3-\d*-6-2-\d*-3-0/)
+      ).map((span) => span.innerHTML);
 
-    const id = parent_currentDiv_img.href.split("/")[2].split("-")[0];
+      const id = parent_currentDiv_img.href.split("/")[2].split("-")[0];
 
-    results.push({
-      poster: currentDiv_img.src || "N/A",
-      title: currentDiv_img.alt || "N/A",
-      id,
-      mature: isMature(genres),
-      genres,
-      lastChapter: { title: lastChapterText, id: lastChapterID },
+      results.push({
+        poster: currentDiv_img.src || "N/A",
+        title: currentDiv_img.alt || "N/A",
+        id,
+        mature: isMature(genres),
+        genres,
+        lastChapter: { title: lastChapterText, id: lastChapterID },
+      });
     });
-  });
+  }
 
   const description =
     document

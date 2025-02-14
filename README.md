@@ -4,6 +4,12 @@
 
 <p align="center"><img src="https://img.shields.io/github/license/TzurS11/mangascrape" alt="shields"> <img src="https://img.shields.io/github/last-commit/tzurs11/mangascrape" alt="shields"> <img src="https://img.shields.io/github/package-json/v/tzurs11/mangascrape" alt="shields"> <img src="https://img.shields.io/npm/dw/mangascrape" alt="shields"> <img src="https://img.shields.io/github/stars/tzurs11/mangascrape?style=flat" alt="shields"></p>
 
+<h2>🛠️ Installation Steps:</h2>
+
+```sh
+npm i mangascrape
+```
+
 <h2>🧐 Features</h2>
 
 Here're some of the project's best features:
@@ -21,10 +27,28 @@ Here're some of the project's best features:
 <br>
 [ ] Mangadex
 
-<h2>🛠️ Installation Steps:</h2>
+<h2>⌨️ Usage</h2>
 
-```sh
-npm i mangascrape
+```js
+const { MangaScrape } = require("mangascrape"); //javascript
+//typescript: import MangaScrape from "mangascrape";
+
+const client = new MangaScrape();
+const batoto = client.BATOTO();
+
+async function getFirstChapter() {
+  const manga = await batoto.search({
+    query: "Demon Slayer",
+    genres: { include: { ContentTag: ["Shounen"] } },
+  });
+  if (manga.results.length < 1) return [];
+
+  const detailed = await batoto.id(manga.results[0].id);
+  if (detailed == undefined) return [];
+  const chapter = await batoto.chapter(detailed.id, detailed.chapters[0].id);
+  return chapter;
+}
+getFirstChapter().then(console.log).catch(console.error);
 ```
 
 <h2>🍰 Contribution Guidelines:</h2>

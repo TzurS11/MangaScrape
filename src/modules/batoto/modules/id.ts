@@ -24,7 +24,7 @@ type GetByID = {
 export default async function id(
   id: string,
   options?: BATOTO_OPTIONS
-): Promise<GetByID> {
+): Promise<GetByID | undefined> {
   let requestConfig = {
     proxy:
       options?.proxy?.host == undefined || options.proxy.port == undefined
@@ -124,7 +124,9 @@ export default async function id(
     },
     requestConfig
   );
-
+  if (response.data.data.get_content_comicNode.data == null) {
+    return undefined;
+  }
   const rssResponse = await axios.get(
     `${getBaseURL(options)}/rss/series/${id}.xml`,
     requestConfig

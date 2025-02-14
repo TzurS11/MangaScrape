@@ -21,9 +21,11 @@ export async function fetchHTML(
     const document = dom.window.document;
     return document;
   } catch (e) {
-    throw new Error(
-      "Failed to fetch HTML.\nTry the following things:\n- Check your internet connection\n- Check if the website is up\n- Check if the website has blocked your IP address\n- Check if the website has blocked the proxy server\n- Change the base URL"
-    );
+    throw {
+      status: e.status,
+      message:
+        "Failed to fetch HTML.\nTry the following things:\n- Check your internet connection\n- Check if the website is up\n- Check if the website has blocked your IP address\n- Check if the website has blocked the proxy server\n- Change the base URL",
+    };
   }
 }
 
