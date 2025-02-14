@@ -1,0 +1,218 @@
+:root[data-theme="light"] {
+  --bg-color: #ffffff;
+  --text-color: #1f2328;
+  --code-bg: #f6f8fa;
+  --border-color: #d0d7de;
+  --highlight: #0969da;
+  --secondary-bg: #f6f8fa;
+}
+
+:root[data-theme="dark"] {
+  --bg-color: #0d1117;
+  --text-color: #c9d1d9;
+  --code-bg: #161b22;
+  --border-color: #30363d;
+  --highlight: #58a6ff;
+  --secondary-bg: #161b22;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+    sans-serif;
+  margin: 0;
+  padding: 0;
+  background: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 1012px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+nav {
+  background: var(--secondary-bg);
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.theme-switch {
+  text-align: right;
+}
+
+h1,
+h2 {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.3em;
+}
+
+.badges {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.badges img {
+  margin: 0 0.25rem;
+}
+
+pre {
+  background: var(--code-bg);
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+}
+
+code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+pre code.hljs {
+  padding: 1rem !important;
+  background: var(--code-bg) !important;
+}
+
+[data-theme="dark"] pre code.hljs {
+  color: var(--text-color) !important;
+}
+
+[data-theme="light"] pre code.hljs {
+  color: var(--text-color) !important;
+}
+
+/* Add specific syntax highlighting color overrides if needed */
+[data-theme="dark"] .hljs-string,
+[data-theme="dark"] .hljs-literal,
+[data-theme="dark"] .hljs-number {
+  color: #a8e890 !important;
+}
+
+[data-theme="dark"] .hljs-keyword {
+  color: #ff7b72 !important;
+}
+
+[data-theme="dark"] .hljs-string {
+  color: #a5d6ff !important;
+}
+
+[data-theme="dark"] .hljs-title {
+  color: #d2a8ff !important;
+}
+
+[data-theme="dark"] .hljs-built_in,
+[data-theme="dark"] .hljs-function {
+  color: #79c0ff !important;
+}
+
+[data-theme="dark"] .hljs-comment {
+  color: #8b949e !important;
+}
+
+[data-theme="dark"] .hljs-number,
+[data-theme="dark"] .hljs-literal {
+  color: #a8e890 !important;
+}
+
+[data-theme="light"] .hljs-keyword {
+  color: #cf222e !important;
+}
+
+[data-theme="light"] .hljs-string {
+  color: #0a3069 !important;
+}
+
+[data-theme="light"] .hljs-title {
+  color: #8250df !important;
+}
+
+[data-theme="light"] .hljs-built_in,
+[data-theme="light"] .hljs-function {
+  color: #0550ae !important;
+}
+
+[data-theme="light"] .hljs-comment {
+  color: #6e7781 !important;
+}
+
+[data-theme="light"] .hljs-number,
+[data-theme="light"] .hljs-literal {
+  color: #0550ae !important;
+}
+
+.sources {
+  list-style: none;
+  padding: 0;
+}
+
+.sources li {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.sources li::before {
+  position: absolute;
+  left: 0;
+}
+
+.supported::before {
+  content: "✓";
+  color: #2ea043;
+}
+
+.planned::before {
+  content: "○";
+}
+
+.code-tabs {
+  margin-bottom: 1rem;
+}
+
+.tab {
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.tab.active {
+  background: var(--highlight);
+  color: white;
+  border-color: var(--highlight);
+}
+
+.lang-icon {
+  width: 32px;
+  height: 32px;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+.title-icon {
+  width: 70px;
+  height: 70px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+#title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+main {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  max-width: 1012px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
