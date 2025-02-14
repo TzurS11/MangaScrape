@@ -6,7 +6,7 @@ import MANGAKAKALOT from "./modules/mangakakalot";
 import { MANGAKAKALOT_OPTIONS } from "./modules/mangakakalot/types";
 import { MAIN_OPTIONS } from "./types";
 
-export default class {
+export default class MangaScrape {
   #mainOptions?: MAIN_OPTIONS;
 
   constructor(options?: MAIN_OPTIONS) {
