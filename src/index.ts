@@ -4,15 +4,24 @@ import MANGABUDDY from "./modules/mangabuddy";
 import { MANGABUDDY_OPTIONS } from "./modules/mangabuddy/types";
 import MANGAKAKALOT from "./modules/mangakakalot";
 import { MANGAKAKALOT_OPTIONS } from "./modules/mangakakalot/types";
+import { MAIN_OPTIONS } from "./types";
 
 export default class MangaScrape {
+  #mainOptions?: MAIN_OPTIONS;
+
+  constructor(options?: MAIN_OPTIONS) {
+    this.#mainOptions = options;
+  }
   /**
    * BATOTO module. Use this module to scrape manga from BATOTO.
    *
    * Before using this source please read the [Terms Of Service](https://bato.to/terms-of-service)
    * specifically the section "Website Access"(3) rule no. 6
    */
-  BATOTO(options?: BATOTO_OPTIONS) {
+  BATOTO(options: BATOTO_OPTIONS = {}) {
+    if (this.#mainOptions != undefined) {
+      options.proxy = this.#mainOptions.proxy;
+    }
     return new BATOTO(options);
   }
 
@@ -24,7 +33,10 @@ export default class MangaScrape {
    *
    * Before using this source please read the [Terms Of Service](https://mangakakalot.com/z-terms-conditions.html)
    */
-  MANGAKAKALOT(options?: MANGAKAKALOT_OPTIONS) {
+  MANGAKAKALOT(options: MANGAKAKALOT_OPTIONS = {}) {
+    if (this.#mainOptions != undefined) {
+      options.proxy = this.#mainOptions.proxy;
+    }
     return new MANGAKAKALOT(options);
   }
 
@@ -36,7 +48,10 @@ export default class MangaScrape {
    * Before using this source please read the [Terms Of Service](https://bato.to/terms-of-service)
    * specifically the section "Website Access"(3) rule no. 6
    */
-  MANGABUDDY(options?: MANGABUDDY_OPTIONS) {
+  MANGABUDDY(options: MANGABUDDY_OPTIONS = {}) {
+    if (this.#mainOptions != undefined) {
+      options.proxy = this.#mainOptions.proxy;
+    }
     return new MANGABUDDY(options);
   }
 }

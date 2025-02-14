@@ -10,3 +10,7 @@ type ProxyType = "http" | "https" | "socks5" | "socks5h";
 export type Options = {
   proxy?: axiosProxy;
 };
+
+export type MAIN_OPTIONS = {
+  proxy?: axiosProxy;
+};
