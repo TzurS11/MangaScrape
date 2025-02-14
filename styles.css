@@ -24,12 +24,15 @@ body {
   background: var(--bg-color);
   color: var(--text-color);
   line-height: 1.5;
+  overflow-x: hidden;
 }
 
 .container {
   max-width: 1012px;
-  margin: 2rem auto;
-  padding: 0 1rem;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 nav {
@@ -49,12 +52,15 @@ h2 {
 }
 
 .badges {
-  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
   margin: 2rem 0;
 }
 
 .badges img {
-  margin: 0 0.25rem;
+  margin: 0;
 }
 
 pre {
@@ -63,6 +69,9 @@ pre {
   border-radius: 6px;
   overflow-x: auto;
   border: 1px solid var(--border-color);
+  max-width: 100%;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 code {
@@ -167,6 +176,9 @@ pre code.hljs {
 }
 
 .code-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   margin-bottom: 1rem;
 }
 
@@ -176,6 +188,9 @@ pre code.hljs {
   color: var(--text-color);
   padding: 0.5rem 1rem;
   cursor: pointer;
+  flex: 1;
+  min-width: 100px;
+  text-align: center;
 }
 
 .tab.active {
@@ -203,6 +218,8 @@ pre code.hljs {
   align-items: center;
   justify-content: center;
   gap: 5px;
+  flex-wrap: wrap;
+  text-align: center;
 }
 
 main {
@@ -211,8 +228,56 @@ main {
   align-items: center;
 }
 
-.container {
-  max-width: 1012px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
+/* Media queries for mobile devices */
+@media screen and (max-width: 768px) {
+  .title-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .lang-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  .container {
+    padding: 1rem;
+  }
+
+  pre {
+    padding: 0.75rem;
+  }
+
+  pre code.hljs {
+    padding: 0.75rem !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .theme-switch {
+    top: 5px;
+    right: 5px;
+  }
+
+  .title-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .badges {
+    gap: 0.25rem;
+  }
+
+  .tab {
+    min-width: 80px;
+    padding: 0.4rem 0.8rem;
+  }
 }
