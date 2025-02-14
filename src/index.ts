@@ -55,3 +55,5 @@ export default class MangaScrape {
     return new MANGABUDDY(options);
   }
 }
+
+export { MangaScrape };
