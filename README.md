@@ -54,7 +54,7 @@ Here're some of the project's best features:
 <br>
 [x] MangaBuddy
 <br>
-[ ] Mangakakalot
+[x] Mangakakalot
 <br>
 [ ] Mangadex
 
