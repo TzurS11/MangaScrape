@@ -18,7 +18,8 @@
   "scripts": {
     "test": "nodemon src/test/test.ts",
     "clean": "rimraf ./dist",
-    "build": "npm run clean && tsc"
+    "build": "npm run clean && tsc",
+    "publish": "npm run build && npm publish"
   },
   "author": "TzurS11",
   "license": "MIT",
