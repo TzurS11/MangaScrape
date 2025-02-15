@@ -29,6 +29,18 @@ export async function fetchHTML(
   }
 }
 
+export function findElementByText(
+  parent: Element,
+  text: string
+): Element | null {
+  const elements = Array.from(parent.querySelectorAll("*"));
+  return (
+    elements.find((element) =>
+      element.textContent?.toLowerCase().includes(text.toLowerCase())
+    ) || null
+  );
+}
+
 export function querySelectorAllRegex(
   document: Document | Element,
   attribute: string,

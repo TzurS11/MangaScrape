@@ -47,7 +47,7 @@ export { MANGAKAKALOT as Mangakakalot } from "./modules/mangakakalot";
 //   /**
 //    * MANGABUDDY module. Use this module to scrape manga from MANGABUDDY.
 //    *
-//    * **TO ACCESS ANY IMAGE FROM THIS WEBSITE YOU NEED TO HAVE https://mangabuddy.com/ AS YOUR REFERER IN YOUR REQUEST HEADERS. THIS INCLUDES CHAPTER PAGES AND MANGA THUMBNAILS.**
+//    * **TO ACCESS ANY PAGE IN A CHAPTER FROM THIS WEBSITE YOU NEED TO HAVE https://mangabuddy.com/ AS YOUR REFERER IN YOUR REQUEST HEADERS.**
 //    *
 //    * Before using this source please read the [Terms Of Service](https://bato.to/terms-of-service)
 //    * specifically the section "Website Access"(3) rule no. 6

@@ -6,6 +6,7 @@ import id from "./modules/id";
 import { MANGABUDDY_OPTIONS } from "./types";
 import search from "./modules/search";
 import chapter from "./modules/chapter";
+import page from "./modules/page";
 
 /**
  * MANGABUDDY module. Use this module to scrape manga from MANGABUDDY.
@@ -61,5 +62,12 @@ export class MANGABUDDY {
    */
   chapter(mangaID: string, chatperID: string) {
     return chapter(mangaID, chatperID, this.options);
+  }
+
+  /**
+   * handle page GET requests. returns a buffer of the image.
+   */
+  page(url: string) {
+    return page(url, this.options);
   }
 }

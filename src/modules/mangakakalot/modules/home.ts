@@ -1,5 +1,6 @@
 import { fetchHTML } from "../../../utils";
-import { MANGAKAKALOT_OPTIONS } from "../types";
+import { MANGAKAKALOT_OPTIONS, Mangakakalot_sources } from "../types";
+import { linkToID } from "../utils";
 
 type Popular = {
   title: string;
@@ -15,7 +16,10 @@ type latestUpdates = {
   id: string;
   title: string;
   cover: string;
+  source: Source;
 };
+
+type Source = Mangakakalot_sources | undefined;
 
 export default async function home(options?: MANGAKAKALOT_OPTIONS) {
   const document = await fetchHTML("https://mangakakalot.com/", options?.proxy);
@@ -52,20 +56,10 @@ export default async function home(options?: MANGAKAKALOT_OPTIONS) {
     const id = linkToID(link);
     const img = anchors.item(0)?.getElementsByTagName("img")[0]?.src || "";
     const title = anchors.item(1)?.textContent || "";
-    latestUpdates.push({ id, title, cover: img });
+    latestUpdates.push({ source: id[1], id: id[0], title, cover: img });
   }
 
   return { populars: popularsArr, latestUpdates };
 }
 
-function linkToID(link: string) {
-  if (link.includes("mangakakalot.com")) {
-    const id = link.split("/")[4];
-    return id;
-  }
-  if (link.includes("chapmanganato.to")) {
-    const id = link.split("/")[3];
-    return id.split("-")[1];
-  }
-  return "";
-}
+// TODO: Switch from the less detailed to more detailed tooltip ripping!
