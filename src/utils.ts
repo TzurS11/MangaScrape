@@ -4,19 +4,25 @@ import { axiosProxy } from "./types";
 
 export async function fetchHTML(
   url: string,
-  proxy?: axiosProxy
+  proxy?: axiosProxy,
+  headers?: Record<string, string>
 ): Promise<Document> {
   try {
     let response: AxiosResponse<string, any>;
-    if (
-      proxy == undefined ||
-      proxy.host == undefined ||
-      proxy.port == undefined
-    ) {
-      response = await axios.get(url);
-    } else {
-      response = await axios.get(url, { proxy: proxy });
-    }
+    const axiosConfig = {
+      headers: headers || {},
+      proxy:
+        proxy && proxy.host && proxy.port
+          ? {
+              host: proxy.host,
+              port: proxy.port,
+              auth: proxy.auth ? proxy.auth : undefined,
+            }
+          : undefined,
+    };
+
+    response = await axios.get(url, axiosConfig);
+
     const dom = new JSDOM(response.data);
     const document = dom.window.document;
     return document;
