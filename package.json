@@ -1,6 +1,6 @@
 {
   "name": "mangascrape",
-  "version": "1.3.2",
+  "version": "1.4.0",
   "description": "Scrape mangas from various sources",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
