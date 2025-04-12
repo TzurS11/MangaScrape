@@ -1,13 +1,23 @@
 import { JSDOM } from "jsdom";
 import axios, { AxiosResponse } from "axios";
-import { axiosProxy } from "./types";
+import { axiosProxy, Options } from "./types";
+
+const cache = new Map<string, Document>();
 
 export async function fetchHTML(
   url: string,
-  proxy?: axiosProxy,
+  options?: Options,
   headers?: Record<string, string>
 ): Promise<Document> {
   try {
+    if (
+      (options.cache == true || options.cache == undefined) &&
+      cache.has(url)
+    ) {
+      return cache.get(url);
+    }
+
+    const proxy = options.proxy;
     let response: AxiosResponse<string, any>;
     const axiosConfig = {
       headers: headers || {},
@@ -25,6 +35,9 @@ export async function fetchHTML(
 
     const dom = new JSDOM(response.data);
     const document = dom.window.document;
+    if (options.cache == true || options.cache == undefined) {
+      cache.set(url, document);
+    }
     return document;
   } catch (e) {
     throw {

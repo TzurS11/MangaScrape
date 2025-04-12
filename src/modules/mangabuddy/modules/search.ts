@@ -8,7 +8,7 @@ export default async function search(
 ) {
   const document = await fetchHTML(
     `https://mangabuddy.com/search?q=${query}`,
-    options?.proxy
+    options
   );
   const body = document.body;
   const searchResults = scrapeItems(body);

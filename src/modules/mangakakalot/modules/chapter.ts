@@ -12,7 +12,7 @@ export default async function chapter(
 
   if (source == "mangakakalot") link = link.replace("/manga/", "/chapter/");
 
-  const document = await fetchHTML(link, options?.proxy);
+  const document = await fetchHTML(link, options);
 
   const body = document.body;
 

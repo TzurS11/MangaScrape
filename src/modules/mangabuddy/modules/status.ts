@@ -10,7 +10,7 @@ export default async function status(
 ) {
   const document = await fetchHTML(
     `https://mangabuddy.com/status/${options}`,
-    baseOptions?.proxy
+    baseOptions
   );
   const body = document.body;
 

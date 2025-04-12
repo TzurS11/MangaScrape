@@ -102,7 +102,7 @@ export default async function search(
 
   const url = buildUrl(baseUrl, queryOptions);
   //   console.log(url);
-  const document = await fetchHTML(url, base_options.proxy);
+  const document = await fetchHTML(url, base_options);
   const body = document.body;
   const results = body.querySelectorAll(
     ".col-6.col-sm-3.col-lg-2 > .page-item-detail.manga"

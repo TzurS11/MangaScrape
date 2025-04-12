@@ -13,7 +13,7 @@ export default async function search(
 
   const document = await fetchHTML(
     "https://mangakakalot.com/search/story/" + sanitizedQuery,
-    options?.proxy
+    options
   );
   const body = document.body;
   const resultsWrapper = Array.from(body.querySelectorAll(".story_item"));

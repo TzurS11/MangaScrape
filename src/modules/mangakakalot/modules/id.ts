@@ -34,10 +34,7 @@ async function handleMangaKakalot(
   id: string,
   options?: MANGAKAKALOT_OPTIONS
 ): Promise<Manga> {
-  const document = await fetchHTML(
-    idToLink(id, "mangakakalot"),
-    options?.proxy
-  );
+  const document = await fetchHTML(idToLink(id, "mangakakalot"), options);
   const body = document.body;
   const poster = body.querySelector(".manga-info-pic > img");
   const altTitles = body
@@ -126,10 +123,7 @@ async function handleChapMangaNato(
   id: string,
   options?: MANGAKAKALOT_OPTIONS
 ): Promise<Manga> {
-  const document = await fetchHTML(
-    idToLink(id, "chapmanganato"),
-    options?.proxy
-  );
+  const document = await fetchHTML(idToLink(id, "chapmanganato"), options);
   const body = document.body;
   const poster = body
     .querySelector(".info-image > .img-loading")

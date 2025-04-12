@@ -29,7 +29,7 @@ export default async function genre(
     urlParams
   );
 
-  const document = await fetchHTML(url, baseOptions?.proxy);
+  const document = await fetchHTML(url, baseOptions);
   const body = document.body;
   const genres = scrapeItems(body);
   return genres;

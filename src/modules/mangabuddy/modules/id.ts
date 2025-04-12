@@ -2,10 +2,7 @@ import { fetchHTML } from "../../../utils";
 import { MANGABUDDY_OPTIONS, MangaDetailed } from "../types";
 
 export default async function id(id: string, options?: MANGABUDDY_OPTIONS) {
-  const document = await fetchHTML(
-    "https://mangabuddy.com/" + id,
-    options?.proxy
-  );
+  const document = await fetchHTML("https://mangabuddy.com/" + id, options);
   const body = document.body;
 
   const box404 = body.querySelector(".box-404");

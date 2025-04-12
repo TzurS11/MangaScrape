@@ -9,7 +9,7 @@ export default async function chapter(
 ) {
   const document = await fetchHTML(
     `https://mangabuddy.com/${mangaID}/${chatperID}`,
-    options?.proxy
+    options
   );
   const body = document.body;
 

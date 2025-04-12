@@ -28,10 +28,7 @@ export default async function getByID(
   id: string,
   options?: TOONLY_OPTIONS
 ): Promise<GetByID> {
-  const document = await fetchHTML(
-    `https://toonily.com/serie/${id}`,
-    options?.proxy
-  );
+  const document = await fetchHTML(`https://toonily.com/serie/${id}`, options);
   const body = document.body;
 
   const title = body

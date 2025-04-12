@@ -22,7 +22,7 @@ type latestUpdates = {
 type Source = Mangakakalot_sources | undefined;
 
 export default async function home(options?: MANGAKAKALOT_OPTIONS) {
-  const document = await fetchHTML("https://mangakakalot.com/", options?.proxy);
+  const document = await fetchHTML("https://mangakakalot.com/", options);
   const body = document.body;
 
   const popularsWrapper = document.getElementById("owl-demo") as HTMLDivElement;

@@ -15,7 +15,7 @@ export default async function home(
   if (options.mature) {
     reqHeaders["Cookie"] = "toonily-mature=1";
   }
-  const document = await fetchHTML(url, base_options.proxy, reqHeaders);
+  const document = await fetchHTML(url, base_options, reqHeaders);
 
   const body = document.body;
 
