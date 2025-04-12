@@ -25,10 +25,7 @@ type Home = {
 };
 
 export default async function home(options?: BATOTO_OPTIONS): Promise<Home> {
-  const document = await fetchHTML(
-    getBaseURL(options) + "/v3x",
-    options?.proxy
-  );
+  const document = await fetchHTML(getBaseURL(options) + "/v3x", options);
 
   const body = document.body;
   const popularGrid = body.querySelector(

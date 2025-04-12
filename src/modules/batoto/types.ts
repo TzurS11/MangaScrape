@@ -262,12 +262,4 @@ interface Summary {
   text: string;
 }
 
-export type ChapterFromRSS = {
-  title: string;
-  link: string;
-  guid: string;
-  description: string;
-  pubDate: string;
-};
-
-export type Chapter = { id: string; title: string; pubDate: string };
+export type Chapter = { id: string; title: string; timestamp: number };

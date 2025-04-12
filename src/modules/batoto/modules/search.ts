@@ -1,23 +1,12 @@
-import { url } from "inspector";
 import { BATOTO_OPTIONS, Metadata } from "../types";
 import { getBaseURL, isMature } from "../utils";
 import {
-  ArtworkStyle,
-  ContentTag,
   Order,
-  OrderMap,
-  ArtworkStyleMap,
-  ContentTagMap,
-  ExplicitContent,
-  ExplicitContentMap,
-  Theme,
-  ThemeMap,
   Genre,
   handleGenres,
   Languages,
   handleLanguages,
   Status,
-  StatusMap,
 } from "./searchTypes";
 import { buildUrl, fetchHTML, querySelectorAllRegex } from "../../../utils";
 
@@ -55,7 +44,7 @@ export default async function search(
   const baseURL = getBaseURL(options) + "/v3x-search";
   const urlParams: Record<string, string> = {};
   if (filters?.query) urlParams.word = filters.query;
-  if (filters?.order) urlParams.sort = OrderMap[filters.order];
+  if (filters?.order) urlParams.sort = filters.order;
   if (filters?.page) urlParams.page = filters.page.toString();
   const genres = handleGenres(filters?.genres);
   if (genres) urlParams.genres = genres;
@@ -64,12 +53,11 @@ export default async function search(
   const translatedLanguages = handleLanguages(filters?.languages?.translated);
   if (translatedLanguages) urlParams.lang = translatedLanguages;
   if (filters?.OriginalWorkStatus)
-    urlParams.status = StatusMap[filters.OriginalWorkStatus];
-  if (filters?.BatoUploadStatus)
-    urlParams.status = StatusMap[filters.BatoUploadStatus];
+    urlParams.status = filters.OriginalWorkStatus;
+  if (filters?.BatoUploadStatus) urlParams.status = filters.BatoUploadStatus;
 
   const url = buildUrl(baseURL, urlParams);
-  const document = await fetchHTML(url, options?.proxy);
+  const document = await fetchHTML(url, options);
   const body = document.body;
 
   const emptyList = body.querySelector(".btn.btn-block.disabled") != null;

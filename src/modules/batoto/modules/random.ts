@@ -1,6 +1,5 @@
 import axios from "axios";
-import { fetchHTML } from "../../../utils";
-import { BATOTO_OPTIONS, Metadata, RandomResponse } from "../types";
+import { BATOTO_OPTIONS, RandomResponse } from "../types";
 import { formatGeners, getBaseURL, isMature } from "../utils";
 
 type RandomComic = {

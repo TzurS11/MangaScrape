@@ -1,168 +1,123 @@
-import axios from "axios";
+import { BATOTO_OPTIONS, Chapter } from "../types";
 import {
-  BATOTO_OPTIONS,
-  Chapter,
-  ChapterFromRSS,
-  GetByIDResponse,
-} from "../types";
-import { parseStringPromise } from "xml2js";
-import { formatGeners, getBaseURL, isMature } from "../utils";
+  arrayFixer,
+  capitalizeEveryWord,
+  getBaseURL,
+  isMature,
+} from "../utils";
+import { fetchHTML, querySelectorAllRegex } from "../../../utils";
+import { Status } from "./searchTypes";
 
 type GetByID = {
   genres: string[];
+  score: number;
+  status: Status;
   id: string;
   chapters: Chapter[];
   description: string;
   mature: boolean;
-  originalLanguage: string | null;
-  translatedLanguage: string | null;
-  readDirection: string | null;
+  languages: {
+    original: string;
+    translated: string;
+  };
+  readDirection?: string;
   poster: string;
+  authors: string[];
+  artists: string[];
   title: { original: string; alt: string[] };
 };
 
 export default async function id(
   id: string,
   options?: BATOTO_OPTIONS
-): Promise<GetByID | undefined> {
-  let requestConfig = {
-    proxy:
-      options?.proxy?.host == undefined || options.proxy.port == undefined
-        ? undefined
-        : options.proxy,
-    headers: {
-      "Content-Type": "application/json",
-      Referer: `${getBaseURL(options)}/v3x-random`,
-    },
+): Promise<GetByID> {
+  const document = await fetchHTML(
+    getBaseURL(options) + "/title/" + id,
+    options
+  );
+
+  let data = JSON.parse(
+    document.querySelector('[prefix="r20"]').getAttribute("props")
+  ).data[1];
+  const mangaID = (data.urlPath[1] as string).split("/")[2];
+  const title = {
+    original: (data.name[1] as string) || "",
+    alt: arrayFixer(JSON.parse(data.altNames[1])),
   };
-  if (requestConfig.proxy == undefined) delete requestConfig.proxy;
-
-  const response = await axios.post(
-    `${getBaseURL(options)}/apo/`,
-    {
-      query: `
-        query get_content_comicNode($id: ID!) {
-          get_content_comicNode(id: $id) {
-            id
-            data {
-              id
-              dbStatus
-              isNormal
-              isHidden
-              isDeleted
-              dateCreate
-              datePublic
-              dateModify
-              dateUpload
-              dateUpdate
-              name
-              slug
-              altNames
-              authors
-              artists
-              genres
-              origLang
-              tranLang
-              uploadStatus
-              originalStatus
-              originalPubFrom
-              originalPubTill
-              readDirection
-              summary {
-                code
-                text
-              }
-              extInfo {
-                code
-              }
-              resInfo {
-                code
-              }
-              urlPath
-              urlCover600
-              urlCover300
-              urlCoverOri
-              userId
-              mod_hide
-              mod_alert_reader
-              stat_is_hot
-              stat_is_new
-              stat_count_follows
-              stat_count_reviews
-              stat_count_post_child
-              stat_count_post_reply
-              stat_count_mylists
-              stat_count_votes
-              stat_count_notes
-              stat_count_emotions {
-                field
-                count
-              }
-              stat_count_statuss {
-                field
-                count
-              }
-              stat_count_scores {
-                field
-                count
-              }
-              stat_count_views {
-                field
-                count
-              }
-              stat_score_avg
-              stat_score_bay
-              stat_score_val
-              stat_count_chapters_normal
-              stat_count_chapters_others
-            }
-          }
-        }
-      `,
-      variables: { id },
-      operationName: "get_content_comicNode",
-    },
-    requestConfig
-  );
-  if (response.data.data.get_content_comicNode.data == null) {
-    return undefined;
+  const authors = arrayFixer(JSON.parse(data.authors[1]));
+  const artists = arrayFixer(JSON.parse(data.artists[1]));
+  let genres = arrayFixer(JSON.parse(data.genres[1]));
+  genres = genres.map((genre) => capitalizeEveryWord(genre.replace(/_/g, " ")));
+  const status = data.originalStatus[1];
+  let readDirection: string = data.readDirection[1];
+  switch (readDirection) {
+    case "ltr":
+      readDirection = "Left to Right";
+      break;
+    case "rtl":
+      readDirection = "Right to Left";
+      break;
+    case "ttb":
+      readDirection = "Top to Bottom";
+      break;
+    default:
+      readDirection = undefined;
+      break;
   }
-  const rssResponse = await axios.get(
-    `${getBaseURL(options)}/rss/series/${id}.xml`,
-    requestConfig
+  let description = data.summary[1].text[1];
+  const poster = data.urlCoverOri[1];
+  const score = data.stat_score_avg[1];
+
+  let chaptersArray: Chapter[] = [];
+  let chaptersDivs = querySelectorAllRegex(
+    document.querySelector(
+      "#app-wrapper > main > div:nth-child(3) > astro-island > div > div:nth-child(2) > div.scrollable-panel.border-base-300\\/50.border.border-r-2.max-h-\\[380px\\].lg\\:max-h-\\[500px\\] > div"
+    ) as Element,
+    "data-hk",
+    /0-0-\d*-0/
   );
 
-  const rssData = await parseStringPromise(rssResponse.data);
-  const chapters = rssData.rss.channel[0].item.map((item: any) => ({
-    title: item.title[0],
-    link: item.link[0],
-    guid: item.guid[0],
-    description: item.description[0],
-    pubDate: item.pubDate[0],
-  })) as ChapterFromRSS[];
-
-  const comicData = response.data.data.get_content_comicNode as GetByIDResponse;
-  const chaptersArr: Chapter[] = [];
-  for (let i = 0; i < chapters.length; i++) {
-    let chapter = chapters[i];
-    chaptersArr.push({
-      id: chapter.guid.split("/")[4],
-      title: chapter.title.replace(comicData.data.name, "").trim(),
-      pubDate: chapter.pubDate,
-    });
+  for (let i = 0; i < chaptersDivs.length; i++) {
+    let currentChapter = chaptersDivs[i];
+    let chapter = currentChapter
+      .getElementsByClassName("link-hover link-primary visited:text-accent")
+      .item(0);
+    if (chapter != null) {
+      const chapterTime = currentChapter
+        .getElementsByTagName("time")
+        .item(0)
+        .getAttribute("time");
+      const timestamp = new Date(chapterTime).getTime();
+      const id = (chapter as HTMLAnchorElement).href
+        .replace("/title/", "")
+        .split("/")[1]
+        .split("-")[0];
+      chaptersArray.push({
+        title: chapter.innerHTML as string,
+        id,
+        timestamp: timestamp,
+      });
+    }
   }
-  chaptersArr.reverse(); // Reverse the array to get the first chapter first
+
+  const languages = {
+    original: (data.origLang[1] as string) || "",
+    translated: (data.tranLang[1] as string) || "",
+  };
 
   return {
-    genres: formatGeners(comicData.data.genres),
-    id: comicData.id,
-    chapters: chaptersArr,
-    description: comicData.data.summary.text,
-    mature: isMature(comicData.data.genres),
-    originalLanguage: comicData.data.origLang,
-    translatedLanguage: comicData.data.tranLang,
-    readDirection: comicData.data.readDirection,
-    poster: comicData.data.urlCoverOri,
-    title: { original: comicData.data.name, alt: comicData.data.altNames },
+    id: (mangaID as string) || "",
+    title: title,
+    languages: languages,
+    description: (description as string) || "",
+    authors: authors,
+    artists: artists,
+    poster: (poster as string) || "",
+    genres: genres,
+    score: (score as number) || 0,
+    status: status as Status,
+    readDirection: (readDirection as string) || "",
+    mature: isMature(genres),
+    chapters: chaptersArray,
   };
 }

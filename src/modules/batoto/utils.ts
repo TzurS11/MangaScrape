@@ -39,3 +39,26 @@ export function formatGeners(arr: string[]) {
   const newArr = arr.map((genre) => toTitleCase(genre.replace(/\_/g, " ")));
   return newArr;
 }
+
+type batoArray = [number, string][];
+export function arrayFixer(arr: batoArray): string[] {
+  let fixedArray: string[] = [];
+  for (let i = 0; i < arr.length; i++) {
+    fixedArray.push(arr[i][1] || "");
+  }
+  return fixedArray;
+}
+
+export function capitalizeEveryWord(input: string): string {
+  const words = input.split(" ");
+
+  const capitalizedWords = words.map((word) => {
+    if (word.length > 0) {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    } else {
+      return "";
+    }
+  });
+
+  return capitalizedWords.join(" ");
+}

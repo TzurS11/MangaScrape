@@ -10,7 +10,7 @@ export default async function chapter(
   try {
     const document = await fetchHTML(
       getBaseURL(options) + "/title/" + comicID + "/" + chapterID,
-      options?.proxy
+      options
     );
 
     const astroisland = document.getElementsByTagName("astro-island");
