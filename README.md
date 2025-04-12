@@ -15,6 +15,7 @@ npm i mangascrape
 Here're some of the project's best features:
 
 - Scrape mangas easily
+- JSDoc documentation
 - Fully typed
 - Multiple sources
 
@@ -23,7 +24,9 @@ Here're some of the project's best features:
 <br>
 [x] MangaBuddy
 <br>
-[ ] Mangakakalot
+[x] Mangakakalot
+<br>
+[x] Toonily
 <br>
 [ ] Mangadex
 
